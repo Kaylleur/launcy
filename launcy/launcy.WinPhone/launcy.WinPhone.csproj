@@ -79,8 +79,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\launcy\launcy.csproj">
-      <Name>launcy</Name>
+    <ProjectReference Include="..\launcy\launcy.Core.csproj">
+      <Name>launcy.Core</Name>
+      <Project>{D1E7F069-E6BF-41C5-A7AE-DC52D3E2F16B}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

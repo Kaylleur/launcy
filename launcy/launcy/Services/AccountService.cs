@@ -10,12 +10,12 @@ namespace launcy.Core.Services
     public class AccountService
     {
         private static AccountService _instance;
-        private static List<Account> _courses;
+        private static List<Account> _accounts;
 
         private AccountService()
         {
-            _courses = new List<Account>();
-            _courses.Add(new Account("toto", "tata"));
+            _accounts = new List<Account>();
+            _accounts.Add(new Account("toto", "tata"));
         }
 
         public static AccountService GetInstance()
@@ -30,7 +30,7 @@ namespace launcy.Core.Services
 
         public Account Verify(string username, string password)
         {
-            foreach (Account account in _courses)
+            foreach (Account account in _accounts)
             {
                 if (account.Username == username && account.Password == password)
                 {
@@ -38,7 +38,7 @@ namespace launcy.Core.Services
                 }
             }
 
-            throw new Exception("Account not found");
+            throw new KeyNotFoundException("The accoun wasn't found.");
         }
     }
 }

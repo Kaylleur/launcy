@@ -26,8 +26,18 @@ namespace launcy.Core.Models
             set;
         }
 
+        private string _id;
+
+        public string Id
+        {
+            get { return _id; }
+            private set { _id = value; }
+        }
+
+
         public Course(string name, StateEnum state)
         {
+            Id = Guid.NewGuid().ToString();
             Name = name;
             State = state;
         }

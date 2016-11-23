@@ -32,9 +32,15 @@ namespace launcy.Core.ViewModels
             get { return new MvxCommand<Course>(GoToCourse); }
         }
 
-        public void GoToCourse(Course currentCourse)
+        public void GoToCourse(Course course)
         {
-            ShowViewModel<CourseViewModel>(new { course = currentCourse });
+            Dictionary<string, string> data = new Dictionary<string, string>
+            {
+                { "Id", course.Id }
+            };
+
+            MvxBundle bundle = new MvxBundle(data);
+            ShowViewModel<CourseViewModel>(bundle);
         }
     }
 }

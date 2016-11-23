@@ -1,9 +1,5 @@
 ﻿using launcy.Core.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace launcy.Core.Services
 {
@@ -42,6 +38,19 @@ namespace launcy.Core.Services
             }
 
             return courses;
+        }
+
+        public Course GetCourseByGuid(string guid)
+        {
+            foreach (Course course in _courses)
+            {
+                if (course.Id.Equals(guid))
+                {
+                    return course;
+                }
+            }
+
+            throw new KeyNotFoundException("The course wasn't found.");
         }
     }
 }

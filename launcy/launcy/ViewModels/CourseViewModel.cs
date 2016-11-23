@@ -1,7 +1,9 @@
 ﻿using launcy.Core.Models;
+using launcy.Core.Services;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,11 +37,25 @@ namespace launcy.Core.ViewModels
             }
         }
 
-        public CourseViewModel(Course course)
+        protected override void InitFromBundle(IMvxBundle parameters)
         {
-            _course = course;
-            Name = course.Name;
-            State = course.State;
+            base.InitFromBundle(parameters);
+            try
+            {
+                _course = CourseService.GetInstance().GetCourseByGuid(parameters.Data["Id"]);
+                Name = _course.Name;
+                State = _course.State;
+            }
+            catch (KeyNotFoundException e)
+            {
+                Debug.WriteLine(e.ToString());
+                ShowViewModel<CoursesViewModel>(); // TODO Handle the error please !
+            }
+        }
+
+        public CourseViewModel()
+        {
+            
         }
 
         public MvxCommand CourseDoneButtonCommand
@@ -50,6 +66,7 @@ namespace launcy.Core.ViewModels
         public void SetCourseDone()
         {
             State = Course.StateEnum.FAIT;
+            ReturnToCourses();
         }
 
         public MvxCommand ReturnButtonCommand
